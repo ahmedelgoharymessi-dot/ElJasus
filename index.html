@@ -81,7 +81,18 @@
     </style>
 </head>
 <body class="p-4 pb-10">
-
+    <div id="loading-screen" class="fixed inset-0 z-[100] bg-[#080808] flex flex-col items-center justify-center transition-opacity duration-500">
+    <video id="loading-video" autoplay muted playsinline class="w-64 h-64 md:w-80 md:h-80 object-contain">
+        <source src="Anime.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="mt-4 flex flex-col items-center">
+        <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full dynamic-bg-primary w-0 transition-all duration-300"></div>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.3em] mt-3 opacity-50 font-bold animate-pulse">Initializing System...</p>
+    </div>
+</div>
     <div class="max-w-md mx-auto">
         <header class="text-center py-6 animate__animated animate__fadeIn">
             <img src="ElJasus2.png" alt="Logo" class="w-20 h-20 mx-auto rounded-full border-2 dynamic-border-primary mb-2 shadow-xl">
@@ -553,6 +564,36 @@ companies: [
 
         resetTheme();
         window.kickPlayer = kickPlayer; 
+
+        // Function to handle the loading screen
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    const progressBar = document.getElementById('progress-bar');
+    const video = document.getElementById('loading-video');
+
+    // Simulate progress bar based on video playback
+    video.ontimeupdate = () => {
+        const percentage = (video.currentTime / video.duration) * 100;
+        progressBar.style.width = percentage + '%';
+    };
+
+    // When video ends, fade out the loader
+    video.onended = () => {
+        progressBar.style.width = '100%';
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    };
+
+    // Fallback: If video takes too long or fails, hide after 5 seconds
+    setTimeout(() => {
+        if (loader.style.display !== 'none') {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
+    }, 5000);
+});
     </script>
 </body>
 </html>
