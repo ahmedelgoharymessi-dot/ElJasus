@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الجاسوس | El Jasus</title>
@@ -16,12 +16,12 @@
     <meta property="og:locale" content="ar_EG">
     <title>الجاسوس | El Jasus</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="ElJasus.png">
+    <link rel="icon" type="image/png" href="ElJasus2.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        /* المتغيرات الأساسية التي سيتم التحكم بها برمجياً */
         :root { 
             --bg-color: #080808;
             --card-color: rgba(20, 20, 20, 0.9);
@@ -56,24 +56,24 @@
         }
         .btn-main:hover { transform: scale(1.02); filter: brightness(1.2); }
 
-        .mode-btn { opacity: 0.5; border: 1px solid transparent; color: var(--text-color); }
-        .mode-btn.active { 
-            opacity: 1; 
-            border-color: var(--accent-color); 
-            color: var(--accent-color);
+        .reveal-innocent {
+            background: linear-gradient(145deg, #065f46, #059669) !important;
+            border-color: #34d399 !important;
+            box-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
+            animation: flipInY 0.6s;
         }
 
-        /* تحسين شكل مدخلات الألوان */
-        input[type="color"] {
-            -webkit-appearance: none;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            background: none;
+        .reveal-spy {
+            background: linear-gradient(145deg, #7f1d1d, #dc2626) !important;
+            border-color: #f87171 !important;
+            box-shadow: 0 0 30px rgba(248, 113, 113, 0.3);
+            animation: shakeX 0.5s;
         }
-        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+
+        .mode-btn { opacity: 0.5; border: 1px solid transparent; color: var(--text-color); }
+        .mode-btn.active { opacity: 1; border-color: var(--accent-color); color: var(--accent-color); }
+
+        input[type="color"] { -webkit-appearance: none; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; background: none; }
         input[type="color"]::-webkit-color-swatch { border: 2px solid white; border-radius: 50%; }
 
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
@@ -84,7 +84,7 @@
 
     <div class="max-w-md mx-auto">
         <header class="text-center py-6 animate__animated animate__fadeIn">
-            <img src="ElJasus.png" alt="Logo" id="headerLogo" class="w-20 h-20 mx-auto rounded-full border-2 dynamic-border-primary mb-2 transition-all">
+            <img src="ElJasus2.png" alt="Logo" class="w-20 h-20 mx-auto rounded-full border-2 dynamic-border-primary mb-2 shadow-xl">
             <h1 class="text-3xl font-900 italic uppercase tracking-tighter">El <span class="dynamic-text-primary">Jasus</span></h1>
 
             <div class="flex justify-center mt-4">
@@ -97,37 +97,25 @@
 
         <div class="glass rounded-3xl p-4 mb-4 border border-white/10 animate__animated animate__fadeIn">
             <div class="flex justify-between items-center mb-3 px-2">
-                <h2 class="text-[10px] font-black uppercase tracking-widest opacity-50">تخصيص الألوان (Custom Style)</h2>
+                <h2 class="text-[10px] font-black uppercase tracking-widest opacity-50">تخصيص الألوان</h2>
                 <button onclick="resetTheme()" class="text-[9px] bg-red-500/20 text-red-500 px-2 py-1 rounded">إعادة ضبط</button>
             </div>
             <div class="grid grid-cols-4 gap-2">
-                <div class="flex flex-col items-center">
-                    <input type="color" id="colorBg" oninput="updateLiveTheme()">
-                    <span class="text-[8px] mt-1 uppercase">الخلفية</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <input type="color" id="colorCard" oninput="updateLiveTheme()">
-                    <span class="text-[8px] mt-1 uppercase">الكروت</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <input type="color" id="colorBtn" oninput="updateLiveTheme()">
-                    <span class="text-[8px] mt-1 uppercase">الأزرار</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <input type="color" id="colorText" oninput="updateLiveTheme()">
-                    <span class="text-[8px] mt-1 uppercase">النصوص</span>
-                </div>
+                <div class="flex flex-col items-center"><input type="color" id="colorBg" oninput="updateLiveTheme()"><span class="text-[8px] mt-1">الخلفية</span></div>
+                <div class="flex flex-col items-center"><input type="color" id="colorCard" oninput="updateLiveTheme()"><span class="text-[8px] mt-1">الكروت</span></div>
+                <div class="flex flex-col items-center"><input type="color" id="colorBtn" oninput="updateLiveTheme()"><span class="text-[8px] mt-1">الأزرار</span></div>
+                <div class="flex flex-col items-center"><input type="color" id="colorText" oninput="updateLiveTheme()"><span class="text-[8px] mt-1">النصوص</span></div>
             </div>
         </div>
 
         <div id="setup-screen" class="glass rounded-[2rem] p-6 shadow-2xl animate__animated animate__fadeInUp">
-            
             <div class="mb-5">
                 <label class="text-[10px] font-bold opacity-50 uppercase block mb-2 px-1">القائمة</label>
-                <select id="gameCat" class="w-full bg-black/40 p-4 rounded-xl border border-white/5 outline-none focus:dynamic-border-primary text-sm appearance-none">
+                <select id="gameCat" class="w-full bg-black/40 p-4 rounded-xl border border-white/5 outline-none focus:dynamic-border-primary text-sm appearance-none cursor-pointer">
                     <option value="places">🌍 أماكن سياحية</option>
                     <option value="food">🍕 أكلات مصرية</option>
                     <option value="jobs">🛠️ مهن ووظائف</option>
+                    <option value="companies">🏢 شركات عالمية</option>
                 </select>
             </div>
 
@@ -147,109 +135,88 @@
             <div id="online-fields" class="hidden space-y-4">
                 <input type="text" id="pName" placeholder="اسمك..." class="w-full bg-black/40 border border-white/5 p-4 rounded-xl text-center outline-none focus:dynamic-border-primary">
                 <div class="grid grid-cols-2 gap-2">
-                    <button id="createBtn" class="bg-white/5 border border-white/10 py-4 rounded-xl font-bold text-xs uppercase">إنشاء</button>
-                    <button id="joinBtn" class="bg-white/5 border border-white/10 py-4 rounded-xl font-bold text-xs uppercase">انضمام</button>
+                    <button id="createBtn" class="bg-white/5 border border-white/10 py-4 rounded-xl font-bold text-xs">إنشاء</button>
+                    <button id="joinBtn" class="bg-white/5 border border-white/10 py-4 rounded-xl font-bold text-xs">انضمام</button>
                 </div>
-                <div id="lobby" class="hidden pt-4 border-t border-white/5 text-center">
-                    <p class="text-[10px] dynamic-text-primary font-bold mb-2">الكود: <span id="roomCode" class="text-white ml-1">----</span></p>
-                    <div id="playersList" class="flex flex-wrap justify-center gap-2 mb-4"></div>
-                    <button id="startOnlineBtn" class="hidden w-full btn-main py-3 rounded-lg text-xs">بدء المهمة 🚀</button>
+                <div id="public-lobby" class="mt-4 border-t border-white/10 pt-4">
+                    <h3 class="text-sm font-bold mb-2">🔍 غرف عامة متاحة</h3>
+                    <div class="max-h-40 overflow-y-auto space-y-2" id="publicRoomsList">
+                        <p class="text-[10px] opacity-50 text-center">لا توجد غرف عامة حالياً</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="game-screen" class="hidden text-center animate__animated animate__fadeIn">
             <div class="mb-4">
-                <p class="text-[10px] dynamic-text-primary font-bold uppercase tracking-widest italic mb-1">المهمة الحالية</p>
+                <p class="text-[10px] dynamic-text-primary font-bold uppercase tracking-widest italic mb-1"> دور اللاعب</p>
                 <h3 id="targetPlayer" class="text-3xl font-black">---</h3>
             </div>
-            <div id="secretCard" class="h-80 glass rounded-[2.5rem] border-2 border-dashed dynamic-border-primary flex flex-col items-center justify-center cursor-pointer transition-transform active:scale-95 shadow-2xl">
-                <i id="cardIcon" class="fas fa-fingerprint text-6xl mb-4 opacity-20"></i>
-                <p id="cardTxt" class="font-bold opacity-50">انقر للكشف 🔒</p>
+            <div id="secretCard" class="h-80 glass rounded-[2.5rem] border-2 border-dashed dynamic-border-primary flex flex-col items-center justify-center cursor-pointer shadow-2xl transition-all">
+                <i class="fas fa-fingerprint text-6xl mb-4 opacity-20"></i>
+                <p class="font-bold opacity-50">انقر للكشف 🔒</p>
             </div>
             <button id="nextBtn" class="hidden mt-6 w-full dynamic-bg-primary py-5 rounded-2xl font-black italic shadow-xl">التالي ✔️</button>
         </div>
     </div>
 
+    <div id="room-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate__animated animate__fadeIn">
+        <div class="glass w-full max-w-sm rounded-[2.5rem] p-6 border border-white/10 shadow-2xl relative">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-2xl font-black dynamic-text-primary cursor-pointer" id="roomCodeContainer" title="اضغط للنسخ">
+                        <span id="displayRoomCode">----</span> <i class="fas fa-copy text-[10px] opacity-30"></i>
+                    </h2>
+                    <p class="text-[9px] opacity-50 uppercase font-bold tracking-widest">كود الغرفة</p>
+                </div>
+                <button id="leaveRoomBtn" class="bg-red-500/10 text-red-500 text-[10px] px-3 py-2 rounded-xl font-bold border border-red-500/20">مغادرة</button>
+            </div>
+
+            <div id="host-controls" class="hidden space-y-3 mb-6 bg-white/5 p-4 rounded-2xl border border-white/5">
+                <label class="text-[8px] font-bold opacity-40 uppercase">إعدادات المضيف</label>
+                <select id="updateCat" onchange="updateRoomSettings()" class="w-full bg-black/40 text-xs p-3 rounded-xl border border-white/10 outline-none">
+                    <option value="places">🌍 أماكن سياحية</option>
+                    <option value="food">🍕 أكلات مصرية</option>
+                    <option value="jobs">🛠️ مهن ووظائف</option>
+                    <option value="companies">🏢 شركات عالمية</option>
+                </select>
+                <div class="flex items-center justify-between bg-black/40 p-3 rounded-xl mb-3 border border-white/10">
+                    <span class="text-xs font-bold">نوع الغرفة:</span>
+                    <button id="toggleVisibility" onclick="toggleRoomVisibility()" class="text-xs px-4 py-1 rounded-full border transition-all"></button>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <label class="text-[10px] font-bold opacity-50 uppercase tracking-widest">اللاعبون المتصلون</label>
+                    <span id="pCount" class="text-[10px] font-black dynamic-text-primary">0/10</span>
+                </div>
+                <div id="roomPlayersList" class="space-y-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar"></div>
+            </div>
+
+            <button id="hostStartBtn" class="hidden w-full btn-main py-4 rounded-2xl font-black shadow-xl disabled:opacity-30 disabled:cursor-not-allowed">ابدأ اللعب 🚀</button>
+            <div id="guestWaitMsg" class="hidden text-center py-2 opacity-40 animate-pulse text-xs font-bold">في انتظار المضيف...</div>
+            <div id="minPlayersMsg" class="hidden text-center text-[10px] text-yellow-500 mt-2">يجب توفر 3 لاعبين على الأقل</div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue, update, get } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+        import { getDatabase, ref, set, onValue, update, get, remove, onDisconnect } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
 
-        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyDnd-pmKEatI3DaFz6xHWB5ucurtHXt9tk",
             authDomain: "el-jasus.firebaseapp.com",
             databaseURL: "https://el-jasus-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "el-jasus",
-            storageBucket: "el-jasus.firebasestorage.app",
-            messagingSenderId: "415659587906",
             appId: "1:415659587906:web:782f7940176ea4097eb0db"
         };
+
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // --- THEME ENGINE ---
-        const themeInputs = {
-            bg: document.getElementById('colorBg'),
-            card: document.getElementById('colorCard'),
-            btn: document.getElementById('colorBtn'),
-            text: document.getElementById('colorText')
-        };
-
-        window.updateLiveTheme = () => {
-            const root = document.documentElement;
-            root.style.setProperty('--bg-color', themeInputs.bg.value);
-            root.style.setProperty('--card-color', hexToRgbA(themeInputs.card.value));
-            root.style.setProperty('--btn-color', themeInputs.btn.value);
-            root.style.setProperty('--text-color', themeInputs.text.value);
-            root.style.setProperty('--accent-color', themeInputs.btn.value); // الأكسنت يتبع لون الأزرار
-
-            // حفظ الإعدادات
-            const config = {
-                bg: themeInputs.bg.value,
-                card: themeInputs.card.value,
-                btn: themeInputs.btn.value,
-                text: themeInputs.text.value
-            };
-            localStorage.setItem('spyCustomTheme', JSON.stringify(config));
-        };
-
-        function hexToRgbA(hex) {
-            let c;
-            if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-                c= hex.substring(1).split('');
-                if(c.length== 3){ c= [c[0], c[0], c[1], c[1], c[2], c[2]]; }
-                c= '0x'+c.join('');
-                return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0.9)';
-            }
-            return hex;
-        }
-
-        window.resetTheme = () => {
-            themeInputs.bg.value = "#080808";
-            themeInputs.card.value = "#141414";
-            themeInputs.btn.value = "#00f2ff";
-            themeInputs.text.value = "#ffffff";
-            updateLiveTheme();
-        };
-
-        // Load Saved Theme
-        const saved = JSON.parse(localStorage.getItem('spyCustomTheme'));
-        if(saved) {
-            themeInputs.bg.value = saved.bg;
-            themeInputs.card.value = saved.card;
-            themeInputs.btn.value = saved.btn;
-            themeInputs.text.value = saved.text;
-            updateLiveTheme();
-        } else { resetTheme(); }
-
-        // --- GAME LOGIC ---
-        let currentMode = 'local', localPlayerCount = 3, localIdx = 0, localSpyIdx = -1, localSecret = "";
-        let myName = "", myRoom = "", isHost = false;
-
         const gameData = {
-             // أماكن سهلة وواضحة (100 مكان)
-    places: [
+             places: [
         "المدرسة", "المستشفى", "حديقة الحيوان", "المطار", "النادي", "السينما", "المطعم", "البحر", "المزرعة", "السيرك",
         "المكتبة", "المسجد", "الكنيسة", "المحل", "الصيدلية", "البنك", "المحكمة", "السجن", "الغابة", "الصحراء",
         "الجبل", "القلعة", "القصر", "الفندق", "المتحف", "المسرح", "المخبز", "المقهى (القهوة)", "السوبر ماركت", "محطة القطار",
@@ -288,124 +255,304 @@
         "خفير", "بودي جارد", "محقق", "جاسوس", "رجل أعمال", "بائع خضار", "بائع فاكهة", "بائع لبن", "مكوجي", "منجد",
         "عامل بناء", "فني تكييف", "فني راديو", "ساحر", "مهرج", "راقص", "مدرب جيم", "سباح محترف", "عامل منجم", "عامل شحن",
         "ساعي بريد", "موظف استقبال", "طبيب بيطري", "طبيب أسنان", "طبيب عيون", "محلل كورة", "سمسار", "تاجر", "مقاول", "طيار درون"
-    ]
+    ],
+
+   // شركات عالمية مشهورة (100 شركة)
+companies: [
+    "Apple", "Google", "Microsoft", "Amazon", "Facebook", "Instagram", "WhatsApp", "YouTube", "TikTok", "Netflix",
+    "Samsung", "Huawei", "Xiaomi", "Oppo", "Sony", "LG", "Dell", "HP", "Intel", "Canon",
+    "Tesla", "Toyota", "Mercedes", "BMW", "Audi", "Ferrari", "Lamborghini", "Ford", "Chevrolet", "Jeep",
+    "Nike", "Adidas", "Puma", "Zara", "H&M", "Gucci", "Prada", "Rolex", "Lacoste", "Chanel",
+    "McDonald's", "KFC", "Burger King", "Pizza Hut", "Subway", "Starbucks", "Pepsi", "Coca-Cola", "Red Bull", "KitKat",
+    "Disney", "Marvel", "DC Comics", "Warner Bros", "Paramount", "Pixar", "Universal", "Spotify", "Snapchat", "Telegram",
+    "Visa", "Mastercard", "PayPal", "Binance", "Amazon", "eBay", "Alibaba", "AliExpress", "Shein", "Noon",
+    "Uber", "Careem", "Airbnb", "Booking", "FedEx", "DHL", "Aramex", "IKEA", "Walmart", "Carrefour",
+    "Nestle", "Dove", "Nivea", "L'Oreal", "Johnson's", "Colgate", "Gillette", "Rolex", "Casio", "Nikon",
+    "Lego", "Barbie", "Hot Wheels", "PlayStation", "Xbox", "Nintendo", "Zoom", "Skype", "Slack", "LinkedIn"
+]
         };
 
-        window.changeLocalCount = (v) => {
-            localPlayerCount = Math.max(3, Math.min(10, localPlayerCount + v));
+        let myName = "", myRoom = "", isHost = false;
+
+        // --- وظائف الثيم ---
+        window.updateLiveTheme = () => {
+            const root = document.documentElement;
+            root.style.setProperty('--bg-color', document.getElementById('colorBg').value);
+            root.style.setProperty('--card-color', document.getElementById('colorCard').value);
+            root.style.setProperty('--btn-color', document.getElementById('colorBtn').value);
+            root.style.setProperty('--accent-color', document.getElementById('colorBtn').value);
+            root.style.setProperty('--text-color', document.getElementById('colorText').value);
+        };
+
+        window.resetTheme = () => {
+            document.getElementById('colorBg').value = "#080808";
+            document.getElementById('colorCard').value = "#141414";
+            document.getElementById('colorBtn').value = "#00f2ff";
+            document.getElementById('colorText').value = "#ffffff";
+            updateLiveTheme();
+        };
+
+        // --- تبديل الأوضاع ---
+        window.switchMode = (mode) => {
+            document.getElementById('setLocal').classList.toggle('active', mode === 'local');
+            document.getElementById('setOnline').classList.toggle('active', mode === 'online');
+            document.getElementById('local-fields').classList.toggle('hidden', mode === 'online');
+            document.getElementById('online-fields').classList.toggle('hidden', mode === 'local');
+            if(mode === 'online') monitorPublicRooms();
+        };
+
+        // --- اللعب المحلي ---
+        let localPlayerCount = 3;
+        window.changeLocalCount = (val) => {
+            localPlayerCount = Math.max(3, Math.min(10, localPlayerCount + val));
             document.getElementById('localCountDisplay').innerText = localPlayerCount;
-            renderInputs();
+            renderLocalInputs();
         };
 
-        function renderInputs() {
-            const c = document.getElementById('localNamesContainer');
-            c.innerHTML = "";
+        function renderLocalInputs() {
+            const container = document.getElementById('localNamesContainer');
+            container.innerHTML = "";
             for(let i=1; i<=localPlayerCount; i++) {
-                c.innerHTML += `<input type="text" class="ln-in w-full bg-black/20 border border-white/5 p-3 rounded-xl text-xs text-center outline-none focus:dynamic-border-primary" value="لاعب ${i}">`;
+                container.innerHTML += `<input type="text" class="local-name-in w-full bg-black/40 border border-white/5 p-3 rounded-xl text-xs text-center outline-none" value="لاعب ${i}">`;
             }
         }
-        renderInputs();
-
-        window.switchMode = (m) => {
-            currentMode = m;
-            document.getElementById('setLocal').classList.toggle('active', m === 'local');
-            document.getElementById('setOnline').classList.toggle('active', m === 'online');
-            document.getElementById('local-fields').classList.toggle('hidden', m === 'online');
-            document.getElementById('online-fields').classList.toggle('hidden', m === 'local');
-        };
+        renderLocalInputs();
 
         window.startLocalGame = () => {
-            const inputs = document.querySelectorAll('.ln-in');
-            const players = Array.from(inputs).map(i => i.value || "مجهول");
+            const names = Array.from(document.querySelectorAll('.local-name-in')).map(i => i.value || "مجهول");
             const cat = document.getElementById('gameCat').value;
-            localSecret = gameData[cat][Math.floor(Math.random()*gameData[cat].length)];
-            localSpyIdx = Math.floor(Math.random()*players.length);
-            localIdx = 0;
-            document.getElementById('setup-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-            showLocalTurn(players);
+            const secret = gameData[cat][Math.floor(Math.random() * gameData[cat].length)];
+            const spyIdx = Math.floor(Math.random() * names.length);
+            showLocalTurn(names, secret, spyIdx, 0);
         };
 
-        function showLocalTurn(players) {
-            document.getElementById('targetPlayer').innerText = players[localIdx];
+        function showLocalTurn(names, secret, spyIdx, idx) {
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            document.getElementById('targetPlayer').innerText = names[idx];
             const card = document.getElementById('secretCard');
-            card.innerHTML = `<i class="fas fa-fingerprint text-6xl mb-4 opacity-20"></i><p class="opacity-50">انقر للكشف 🔒</p>`;
-            document.getElementById('nextBtn').classList.add('hidden');
+            const btn = document.getElementById('nextBtn');
             
+            card.classList.remove('reveal-spy', 'reveal-innocent');
+            card.innerHTML = `<i class="fas fa-fingerprint text-6xl mb-4 opacity-20"></i><p class="font-bold opacity-50">انقر للكشف 🔒</p>`;
+            btn.classList.add('hidden');
+
             card.onclick = () => {
-                const isSpy = localIdx === localSpyIdx;
-                card.innerHTML = isSpy ? `<i class="fas fa-user-secret text-6xl mb-4 text-red-500"></i><span class="text-red-500 text-2xl font-black uppercase">جاسوس</span>` : `<i class="fas fa-key text-6xl mb-4 dynamic-text-primary"></i><span class="text-[10px] opacity-50 block">الكلمة</span><span class="text-2xl font-black">${localSecret}</span>`;
-                document.getElementById('nextBtn').classList.remove('hidden');
+                if(idx === spyIdx) {
+                    card.classList.add('reveal-spy');
+                    card.innerHTML = `<i class="fas fa-user-secret text-7xl mb-4"></i><h2 class="text-3xl font-black italic">جاسوس</h2>`;
+                } else {
+                    card.classList.add('reveal-innocent');
+                    card.innerHTML = `<i class="fas fa-key text-5xl mb-4"></i><p class="text-[10px] opacity-70">الكلمة</p><h2 class="text-3xl font-black">${secret}</h2>`;
+                }
+                btn.classList.remove('hidden');
+                card.onclick = null;
             };
 
-            document.getElementById('nextBtn').onclick = () => {
-                localIdx++;
-                if(localIdx < players.length) showLocalTurn(players);
-                else { alert("ابدأوا اللعبة!"); location.reload(); }
+            btn.onclick = () => {
+                if(idx + 1 < names.length) showLocalTurn(names, secret, spyIdx, idx + 1);
+                else location.reload();
             };
         }
 
-        // --- ONLINE LOGIC ---
+        // --- أونلاين ---
+        function monitorPublicRooms() {
+            onValue(ref(db, 'rooms'), (snap) => {
+                const list = document.getElementById('publicRoomsList');
+                list.innerHTML = "";
+                const rooms = snap.val();
+                if(!rooms) return;
+                Object.keys(rooms).forEach(code => {
+                    const r = rooms[code];
+                    if(r.visibility === 'public' && r.status === 'waiting') {
+                        const el = document.createElement('div');
+                        el.className = "flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5 cursor-pointer hover:dynamic-border-primary";
+                        el.onclick = () => { myRoom = code; document.getElementById('joinBtn').click(); };
+                        el.innerHTML = `<span class="text-xs font-bold text-cyan-400">${code}</span><span class="text-[10px] opacity-50">${r.players ? r.players.length : 0}/10 👤</span>`;
+                        list.appendChild(el);
+                    }
+                });
+            });
+        }
+
         document.getElementById('createBtn').onclick = async () => {
             myName = document.getElementById('pName').value.trim();
             if(!myName) return alert("الاسم مطلوب");
             myRoom = Math.random().toString(36).substring(2, 6).toUpperCase();
             isHost = true;
-            await set(ref(db, 'rooms/' + myRoom), { host: myName, status: 'waiting', players: [myName], turn: 0, category: document.getElementById('gameCat').value });
-            listenRoom();
+            await set(ref(db, 'rooms/' + myRoom), { 
+                host: myName, status: 'waiting', players: [myName], turn: 0, 
+                category: document.getElementById('gameCat').value, visibility: 'private' 
+            });
+            initRoom();
         };
 
         document.getElementById('joinBtn').onclick = async () => {
             myName = document.getElementById('pName').value.trim();
-            let code = prompt("كود الغرفة:");
-            if(!myName || !code) return;
-            myRoom = code.toUpperCase();
-            const snapshot = await get(ref(db, 'rooms/' + myRoom));
-            if(!snapshot.exists()) return alert("غير موجودة");
-            let ps = snapshot.val().players;
-            ps.push(myName);
-            await update(ref(db, 'rooms/' + myRoom), { players: ps });
-            listenRoom();
+            if(!myName) return alert("الاسم مطلوب");
+            if(!myRoom) myRoom = prompt("أدخل كود الغرفة:").toUpperCase();
+            const snap = await get(ref(db, 'rooms/' + myRoom));
+            if(!snap.exists()) return alert("الغرفة غير موجودة");
+            const d = snap.val();
+            if(!d.players.includes(myName)) {
+                if(d.players.length >= 10) return alert("الغرفة ممتلئة");
+                await update(ref(db, 'rooms/' + myRoom), { players: [...d.players, myName] });
+            }
+            isHost = false;
+            initRoom();
         };
 
-        function listenRoom() {
-            document.getElementById('lobby').classList.remove('hidden');
-            document.getElementById('roomCode').innerText = myRoom;
-            onValue(ref(db, 'rooms/' + myRoom), (s) => {
-                const d = s.val();
-                if(!d) return;
-                document.getElementById('playersList').innerHTML = d.players.map(p => `<span class="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[9px] font-bold">${p}</span>`).join('');
-                if(isHost && d.players.length >= 3) document.getElementById('startOnlineBtn').classList.remove('hidden');
+        function initRoom() {
+            document.getElementById('room-overlay').classList.remove('hidden');
+            const roomRef = ref(db, 'rooms/' + myRoom);
+            
+            onValue(roomRef, (snap) => {
+                const d = snap.val();
+                if(!d) { location.reload(); return; }
+                
+                if(!d.players.includes(myName)) {
+                    alert("تم طردك من الغرفة");
+                    location.reload();
+                    return;
+                }
+
+                document.getElementById('displayRoomCode').innerText = myRoom;
+                const pCount = d.players.length;
+                document.getElementById('pCount').innerText = `${pCount}/10`;
+                
+                isHost = (d.host === myName);
+
+                if(isHost) {
+                    document.getElementById('host-controls').classList.remove('hidden');
+                    document.getElementById('hostStartBtn').classList.remove('hidden');
+                    document.getElementById('guestWaitMsg').classList.add('hidden');
+                    
+                    const startBtn = document.getElementById('hostStartBtn');
+                    const msg = document.getElementById('minPlayersMsg');
+                    if(pCount >= 3) {
+                        startBtn.disabled = false;
+                        msg.classList.add('hidden');
+                    } else {
+                        startBtn.disabled = true;
+                        msg.classList.remove('hidden');
+                    }
+
+                    const vBtn = document.getElementById('toggleVisibility');
+                    vBtn.innerHTML = d.visibility === 'public' ? '<i class="fas fa-globe mr-1"></i> عام' : '<i class="fas fa-lock mr-1"></i> خاص';
+                    vBtn.className = d.visibility === 'public' ? "text-xs px-4 py-1 rounded-full border border-green-500 text-green-500" : "text-xs px-4 py-1 rounded-full border border-red-500 text-red-500";
+                } else {
+                    document.getElementById('host-controls').classList.add('hidden');
+                    document.getElementById('hostStartBtn').classList.add('hidden');
+                    document.getElementById('guestWaitMsg').classList.remove('hidden');
+                    document.getElementById('minPlayersMsg').classList.add('hidden');
+                }
+
+                document.getElementById('roomPlayersList').innerHTML = d.players.map(p => {
+                    const isMe = (p === myName);
+                    const isTargetHost = (p === d.host);
+                    return `
+                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl border border-white/5">
+                            <span class="text-xs">${isTargetHost ? '👑' : '👤'} ${p} ${isMe ? '(أنت)' : ''}</span>
+                            ${isHost && !isMe ? `<button onclick="kickPlayer('${p}')" class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded-lg border border-red-500/20 hover:bg-red-500 hover:text-white transition-all">طرد</button>` : ''}
+                        </div>
+                    `;
+                }).join('');
+
                 if(d.status === 'playing') showOnlineGame(d);
-                if(d.status === 'finished') { alert("انتهى! الجاسوس: " + d.players[d.spyIdx]); location.reload(); }
+                else { 
+                    document.getElementById('game-screen').classList.add('hidden'); 
+                    document.getElementById('room-overlay').classList.remove('hidden');
+                }
             });
         }
 
-        document.getElementById('startOnlineBtn').onclick = async () => {
+        async function handleLeave(data, nameToLeave) {
+            let players = data.players.filter(p => p !== nameToLeave);
+            if(players.length === 0) {
+                await remove(ref(db, 'rooms/' + myRoom));
+            } else {
+                let updates = { players: players };
+                if(data.host === nameToLeave) {
+                    updates.host = players[Math.floor(Math.random() * players.length)];
+                }
+                await update(ref(db, 'rooms/' + myRoom), updates);
+            }
+        }
+
+        window.kickPlayer = async (targetName) => {
+            const snap = await get(ref(db, 'rooms/' + myRoom));
+            if(snap.exists()) {
+                const d = snap.val();
+                const newPlayers = d.players.filter(p => p !== targetName);
+                await update(ref(db, 'rooms/' + myRoom), { players: newPlayers });
+            }
+        };
+
+        document.getElementById('leaveRoomBtn').onclick = async () => {
+            const snap = await get(ref(db, 'rooms/' + myRoom));
+            if(snap.exists()) {
+                await handleLeave(snap.val(), myName);
+            }
+            location.reload();
+        };
+
+        window.toggleRoomVisibility = async () => {
             const s = await get(ref(db, 'rooms/' + myRoom));
-            const ps = s.val().players;
-            update(ref(db, 'rooms/' + myRoom), { status: 'playing', secret: gameData[s.val().category][0], spyIdx: 0, turn: 0 });
+            update(ref(db, 'rooms/' + myRoom), { visibility: s.val().visibility === 'private' ? 'public' : 'private' });
+        };
+
+        window.updateRoomSettings = () => {
+            update(ref(db, 'rooms/' + myRoom), { category: document.getElementById('updateCat').value });
+        };
+
+        document.getElementById('hostStartBtn').onclick = async () => {
+            const snap = await get(ref(db, 'rooms/' + myRoom));
+            const d = snap.val();
+            const secret = gameData[d.category][Math.floor(Math.random() * gameData[d.category].length)];
+            update(ref(db, 'rooms/' + myRoom), { 
+                status: 'playing', secret: secret, 
+                spyIdx: Math.floor(Math.random() * d.players.length), turn: 0 
+            });
         };
 
         function showOnlineGame(d) {
-            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('room-overlay').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
             const isMyTurn = d.players[d.turn] === myName;
             document.getElementById('targetPlayer').innerText = d.players[d.turn];
+            
             const card = document.getElementById('secretCard');
-            card.style.opacity = isMyTurn ? "1" : "0.3";
+            const btn = document.getElementById('nextBtn');
+            card.classList.remove('reveal-spy', 'reveal-innocent');
+            card.innerHTML = `<i class="fas fa-fingerprint text-6xl mb-4 opacity-20"></i><p class="font-bold opacity-50">انقر للكشف 🔒</p>`;
             card.style.pointerEvents = isMyTurn ? "auto" : "none";
+            btn.classList.add('hidden');
+
             card.onclick = () => {
-                const isSpy = d.players.indexOf(myName) === d.spyIdx;
-                card.innerHTML = isSpy ? "أنت الجاسوس" : d.secret;
-                document.getElementById('nextBtn').classList.remove('hidden');
+                if(d.players.indexOf(myName) === d.spyIdx) {
+                    card.classList.add('reveal-spy');
+                    card.innerHTML = `<i class="fas fa-user-secret text-7xl mb-4"></i><h2 class="text-3xl font-black italic">جاسوس</h2>`;
+                } else {
+                    card.classList.add('reveal-innocent');
+                    card.innerHTML = `<i class="fas fa-key text-5xl mb-4"></i><h2 class="text-3xl font-black">${d.secret}</h2>`;
+                }
+                btn.classList.remove('hidden');
+                card.onclick = null;
             };
-            document.getElementById('nextBtn').onclick = () => {
-                const next = d.turn + 1;
-                if(next >= d.players.length) update(ref(db, 'rooms/' + myRoom), { status: 'finished' });
-                else update(ref(db, 'rooms/' + myRoom), { turn: next });
+
+            btn.onclick = () => {
+                if(d.turn + 1 >= d.players.length) update(ref(db, 'rooms/' + myRoom), { status: 'waiting' });
+                else update(ref(db, 'rooms/' + myRoom), { turn: d.turn + 1 });
             };
         }
+        
+        document.getElementById('roomCodeContainer').onclick = () => {
+            navigator.clipboard.writeText(myRoom);
+            alert("تم نسخ الكود!");
+        };
+
+        resetTheme();
+        window.kickPlayer = kickPlayer; 
     </script>
 </body>
 </html>
