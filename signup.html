@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Phinex</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="Phinex - Copy.png">
+
+    <style>
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: url("Phinex\ -\ Copy.png") no-repeat center center/cover fixed;
+            background-color: #0a0a0a; /* Fallback */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .system-title {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .system-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .registration-box {
+            background-color: #1a1a1a;
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .registration-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.4);
+        }
+
+        .registration-box h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .registration-box h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+
+        /* --- Form Elements --- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffffff;
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+            border: 2px solid #fff;
+        }
+
+        /* --- Social Section --- */
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-login p::before, .social-login p::after {
+            content: '';
+            height: 1px;
+            width: 50px;
+            background: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icons a img {
+            width: 24px; /* Exact official sizing */
+        }
+
+        .social-icons a i {
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- UI Components --- */
+        .construction-notice {
+            background-color: #2a2a2a;
+            border-left: 5px solid #ffffff;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #fff;
+        }
+
+         .return-home-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    width: 300px;
+    height: 70px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 15px;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.return-home-btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 15px;
+}
+
+.return-home-btn:active {
+    color: #000
+}
+
+.return-home-btn:active:after {
+    background: transparent;
+}
+
+.return-home-btn:hover:before {
+    opacity: 1;
+}
+
+.return-home-btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 15px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+        /* Hide the default browser checkbox */
+.real-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* The Container */
+.check-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+    gap: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+/* The Custom Box */
+.custom-checkbox {
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255, 255, 255);
+    border: 2px solid var(--border-color);
+    border-radius: 6px; /* Soft rounded corners */
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover effect on the box */
+.check-container:hover .custom-checkbox {
+    border-color: rgb(255, 0, 0);
+    box-shadow: 0 0 8px rgb(81, 0, 161);
+}
+
+/* Checked state: Background changes to Primary */
+.real-checkbox:checked + .custom-checkbox {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Create the checkmark (hidden by default) */
+.custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Show checkmark when checked */
+.real-checkbox:checked + .custom-checkbox:after {
+    display: block;
+}
+
+/* Disabled state (for your scroll-to-read logic) */
+.real-checkbox:disabled + .custom-checkbox {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+.label-text {
+    color: rgba(255, 255, 255);
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.real-checkbox:disabled ~ .label-text {
+    opacity: 0.5;
+}
+
+.signIn {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.signIn:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: 700;
+    transition: color 0.3s;
+    cursor: pointer;
+    text-decoration: underline;
+
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="system-title">
+        <h1>PhineX Sign Up System</h1>
+        <p>Create an account to start your journey.</p>
+    </div>
+
+    <div class="registration-box">
+        <h2>Sign Up</h2>
+        <form id="registerForm">
+    <div class="form-group">
+        <label>Username (Game ID)</label>
+        <input type="text" id="username" placeholder="Agent_007" required>
+    </div>
+
+    <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="PhineX User" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="PhineX@example.com" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="••••••••" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="••••••••" required>
+    </div>
+    
+    <label class="check-container dont-show-label">
+        <input type="checkbox" id="dontShowAgain" class="real-checkbox" required>
+        <span class="custom-checkbox"></span>
+        <span class="label-text">I agree to the terms and conditions</span>
+    </label>
+
+    <div class="construction-notice" style="margin-top: 15px; text-align: center; margin-bottom: 15px;">
+        Already have an account? <a href="login.html" id="login" class="signIn"> Sign in</a>
+    </div>
+
+    <button type="submit" class="btn" id="registerBtn">Create Account</button>
+</form>
+    </div>
+
+    <a href="index.html" class="return-home-btn" style="margin-top: 20px;">
+        <i class="fas fa-home" style="margin-right: 10px;"></i> Return Home
+    </a>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+<script>
+   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDnd-pmKEatI3DaFz6xHWB5ucurtHXt9tk",
+  authDomain: "el-jasus.firebaseapp.com",
+  databaseURL: "https://el-jasus-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "el-jasus",
+  storageBucket: "el-jasus.firebasestorage.app",
+  messagingSenderId: "415659587906",
+  appId: "1:415659587906:web:782f7940176ea4097eb0db",
+  measurementId: "G-N4K79FP56N"
+};
+    firebase.initializeApp(firebaseConfig);
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Capture the Username input
+        const usernameValue = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPass = document.getElementById('confirmPassword').value;
+        const btn = document.getElementById('registerBtn');
+
+        // Validation: Passwords match
+        if(password !== confirmPass) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        btn.textContent = 'Processing...';
+        btn.disabled = true;
+
+        // 1. Create User
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // 2. SAVE USERNAME TO DATABASE (displayName)
+                return userCredential.user.updateProfile({
+                    displayName: usernameValue
+                });
+            })
+            .then(() => {
+                // 3. Save name locally for immediate auto-fill in the game
+                localStorage.setItem('eljasus_user_name', usernameValue);
+                
+                alert('Account created! Welcome, ' + usernameValue);
+                window.location.href = "index.html"; 
+            })
+            .catch((error) => {
+                alert('Error: ' + error.message);
+                btn.textContent = 'Create Account';
+                btn.disabled = false;
+            });
+    });
+</script>
+</body>
+</html>

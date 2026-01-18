@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | PhineX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+    <style>
+        /* --- General Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: url("Phinex - Copy.png") no-repeat center center/cover fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background-color: #0a0a0a; /* Fallback */
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 500px; /* Reduced width for a cleaner centered look */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .system-title {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .system-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(124, 48, 255, 0.6);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-box {
+            background-color: #1a1a1a;
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .login-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(124, 48, 255, 0.3);
+            border-color: #7c30ff;
+        }
+
+        .login-box h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .login-box h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #7c30ff;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #7c30ff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(124, 48, 255, 0.5);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: #7c30ff;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(124, 48, 255, 0.4);
+        }
+
+        /* Center Footer Section */
+        .login-footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .login-footer p {
+            margin-bottom: 10px;
+        }
+
+        .login-footer a {
+            color: #7c30ff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .login-footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #888;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    overflow: hidden; /* Ensures the image stays in the circle */
+}
+
+/* Specific styling for the Google Image */
+.social-icons a.google-official img {
+    width: 30px; /* Adjust size to match your screenshot proportions */
+    height: auto;
+}
+
+/* Professional Hover States */
+.social-icons a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(124, 48, 255, 0.4);
+}
+
+.social-icons a.google-official:hover {
+    background-color: #f8f9fa; /* Slight off-white on hover */
+    border: 1px solid #4285f4;
+}
+
+/* Keep Facebook and Twitter styled as icons */
+.social-icons a.facebook i { color: #1877F2; font-size: 1.4rem; }
+.social-icons a.twitter i { color: #1DA1F2; font-size: 1.4rem; }
+
+         .return-home-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    width: 300px;
+    height: 70px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 15px;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.return-home-btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 15px;
+}
+
+.return-home-btn:active {
+    color: #000
+}
+
+.return-home-btn:active:after {
+    background: transparent;
+}
+
+.return-home-btn:hover:before {
+    opacity: 1;
+}
+
+.return-home-btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 15px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+         /* Hide the default browser checkbox */
+.real-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* The Container */
+.check-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+    gap: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+/* The Custom Box */
+.custom-checkbox {
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255, 255, 255);
+    border: 2px solid var(--border-color);
+    border-radius: 6px; /* Soft rounded corners */
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover effect on the box */
+.check-container:hover .custom-checkbox {
+    border-color: rgb(255, 0, 0);
+    box-shadow: 0 0 8px rgb(81, 0, 161);
+}
+
+/* Checked state: Background changes to Primary */
+.real-checkbox:checked + .custom-checkbox {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Create the checkmark (hidden by default) */
+.custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Show checkmark when checked */
+.real-checkbox:checked + .custom-checkbox:after {
+    display: block;
+}
+
+/* Disabled state (for your scroll-to-read logic) */
+.real-checkbox:disabled + .custom-checkbox {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+.label-text {
+    color: rgba(255, 255, 255);
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.real-checkbox:disabled ~ .label-text {
+    opacity: 0.5;
+}
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="system-title">
+            <h1>PhineX Signin System</h1>
+        </div>
+        
+        <div class="login-box">
+            <h2>Sign In</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Email Address</label>
+                    <input type="email" id="username" placeholder="name@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                
+                <label class="check-container dont-show-label">
+            <input type="checkbox" id="forgot_password" class="real-checkbox" required>
+            <span class="custom-checkbox"></span>
+            <span class="label-text">Keep me signed in</span>
+        </label>
+        <div class="login-footer">
+                <p style="margin-bottom: 10px; margin-top: 10px;">Don't have an account? <a href="signup.html">Create one now</a></p>
+                <button type="submit" class="btn" id="loginBtn" style="margin-bottom: 10px; margin-top: 10px;">Sign-in</button>
+                </div>
+                <div class="social-login">
+                    <p>Or sign in with</p>
+                        <div class="social-icons">
+     <a href="#" class="google-official">
+            <img src="data:image/jpeg;base64,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
+
+" alt="Google Logo">
+        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <a href="index.html" class="return-home-btn">
+            <i class="fas fa-arrow-left" style="margin-right: 10px;"></i> Return Home
+        </a>
+
+   <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDnd-pmKEatI3DaFz6xHWB5ucurtHXt9tk",
+        authDomain: "el-jasus.firebaseapp.com",
+        databaseURL: "https://el-jasus-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "el-jasus",
+        storageBucket: "el-jasus.firebasestorage.app",
+        messagingSenderId: "415659587906",
+        appId: "1:415659587906:web:782f7940176ea4097eb0db",
+        measurementId: "G-N4K79FP56N"
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const keepSignedIn = document.getElementById('forgot_password').checked;
+        const loginBtn = document.getElementById('loginBtn');
+
+        loginBtn.textContent = 'Verifying...';
+        loginBtn.disabled = true;
+
+        const persistence = keepSignedIn ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
+
+        auth.setPersistence(persistence)
+            .then(() => {
+                return auth.signInWithEmailAndPassword(email, password);
+            })
+            .then((userCredential) => {
+                // --- FETCH USERNAME FROM DATABASE ---
+                const user = userCredential.user;
+                const userName = user.displayName || "Agent"; // Fallback to Agent if name is missing
+                
+                // Save to local storage for index.html to read
+                localStorage.setItem('eljasus_user_name', userName);
+                
+                window.location.href = "index.html"; 
+            })
+            .catch((error) => {
+                alert("Access Denied: " + error.message);
+                loginBtn.textContent = 'Sign-in';
+                loginBtn.disabled = false;
+            });
+    });
+
+    // Handle Google Login - Wait for DOM to load
+document.addEventListener('DOMContentLoaded', function() {
+    const googleLoginBtn = document.querySelector('.google-official');
+    
+    if (!googleLoginBtn) {
+        console.error('Google login button not found!');
+        return;
+    }
+    
+    googleLoginBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Make sure firebase is loaded
+        if (typeof firebase === 'undefined') {
+            alert("Firebase not loaded. Please refresh the page.");
+            return;
+        }
+        
+        // Make sure auth is initialized
+        if (typeof auth === 'undefined') {
+            alert("Authentication not initialized.");
+            return;
+        }
+        
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                console.log("Google sign-in successful:", result.user);
+                
+                // Save Google Name to local storage
+                if (result.user && result.user.displayName) {
+                    localStorage.setItem('eljasus_user_name', result.user.displayName);
+                    localStorage.setItem('eljasus_user_email', result.user.email);
+                    
+                    // Update the name field if it exists on the current page
+                    const nameField = document.getElementById('pName');
+                    if (nameField) {
+                        nameField.value = result.user.displayName;
+                    }
+                }
+                
+                // Redirect to main page
+                window.location.href = "index.html";
+            })
+            .catch(err => {
+                console.error("Google Sign-in failed:", err);
+                alert("Google Sign-in failed: " + err.message);
+            });
+    });
+    
+    console.log('Google login handler attached successfully');
+});
+</script>
+</body>
+</html>
